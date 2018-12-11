@@ -14,7 +14,7 @@ file {"/root/tomcatDockerImage":
     notify => File["/root/tomcatDockerImage/Dockerfile"],
   }
 
-file {"/root/tomcatDockerImage/addressbook.war":
+file {"/root/tomcatDockerImage/employee-producer-0.0.1-SNAPSHOT.jar":
     ensure=> file,
     source => "puppet:///module_files/deploydocker/files/employee-producer-0.0.1-SNAPSHOT.jar",
     require =>Class["docker"],	
@@ -28,8 +28,8 @@ $application_directory = '/root/tomcatDockerImage'
     notify =>Docker::Run['employee-producer-0.0.1-SNAPSHOT']
     }
   # run the container using the image above
- docker::run { 'addressbookimage':
-    image   => 'addressbookimage',
+ docker::run { 'employee-producer-0.0.1-SNAPSHOT':
+    image   => 'employee-producer-0.0.1-SNAPSHOT',
     ports   => ['8080:8080'],
    require => Docker::Image['employee-producer-0.0.1-SNAPSHOT']
   }
